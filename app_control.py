@@ -205,12 +205,11 @@ def control(command):
             "grammarly": "Grammarly Desktop.app",
             "loom": "Loom.app",
             "tailscale": "Tailscale.app"
-        }
+        } # obivously adopted from chatgpt
 
     if app in names:
         app = names[app]
         subprocess.run(["open", "-a", app])
-        return f"Opened {app}"
     result = subprocess.run(
         ["open", "-a", app],
         capture_output=True,
@@ -219,7 +218,5 @@ def control(command):
 
     if result.returncode ==0 :
         print(f"Opening {app}...")
-        return f"Opened {app}"
+        print(f"Opened {app}")
     
-    else:
-        print(f"Could not find the {app}")
