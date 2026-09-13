@@ -1,7 +1,6 @@
 from help import help
 from datetime import datetime
 import random
-import math
 
 while True:
     command = input("> ").lower()
@@ -19,8 +18,8 @@ while True:
         side = random.choice(["heads", "tails"])
         print(side)
 
-                 
-            
+    elif command.startswith("open") or command.startswith("launch"):
+        pass
 
         
 
