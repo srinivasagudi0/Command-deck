@@ -2,7 +2,7 @@
 
 
 features = """
-'help' - to get this block.
+'commands' - to get this block.
 """
 
 def help():

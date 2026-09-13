@@ -1,12 +1,22 @@
 from help import help
+from datetime import datetime
+import random
 
 while True:
     command = input("> ").lower()
 
-    if command == "help":
+    if command == "commands":
         print(help())
 
-    if command == "exit":
+    elif command == "exit":
         exit()
 
-    print("Unknown Command")
+    elif command=="time":
+        now = datetime.now()
+        print(now.strftime("%I:%M %p"))
+    elif command =="coin":
+        side = random.choice(["heads", "tails"])
+        print(side)
+    else:
+        print("Unknown Command")
+        
