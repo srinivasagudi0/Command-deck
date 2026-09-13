@@ -1,0 +1,1 @@
+# i am planning to add a lot of features so help is required so i put it here instead of confuesing me in the app.py
