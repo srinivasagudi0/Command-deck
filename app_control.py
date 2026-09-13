@@ -1,7 +1,7 @@
 def control(command):
     import subprocess
     
-    app = command.replace("lauch", "").replace("open", "").strip()
+    app = command.replace("launch", "").replace("open", "").strip()
     names = {
             # Text Editors, IDEs & Code Tools
             "vs code": "Visual Studio Code.app",

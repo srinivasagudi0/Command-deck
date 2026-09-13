@@ -20,7 +20,7 @@ while True:
         print(side)
 
     elif command.startswith("open") or command.startswith("launch"):
-        ctrl(command)
+        print(ctrl(command))
 
         
 
