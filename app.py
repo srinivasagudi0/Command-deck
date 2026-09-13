@@ -1,6 +1,7 @@
 from help import help
 from datetime import datetime
 import random
+from app_control import control as ctrl
 
 while True:
     command = input("> ").lower()
@@ -19,7 +20,7 @@ while True:
         print(side)
 
     elif command.startswith("open") or command.startswith("launch"):
-        pass
+        ctrl(command)
 
         
 
