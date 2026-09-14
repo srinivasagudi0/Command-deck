@@ -11,36 +11,17 @@ def check_app_mac(app):
         return True
     return False
 
-def protocol(command):
-    command= command.removeprefix("protocol ").strip() # for ex "coding"
-    #check the json for what apps to open and what apps to close.
-    if command == "coding":
-        ctrl("vscode")
-        ctrl("terminal")
-        if check_app_mac("ChatGPT Classic"):
-            ctrl("chatgpt")
-        else:
-            wb.open("https://chatgpt.com")
-        wb.open("https://github.com")
-        wb.open("https://hackatime.hackclub.com")
-        if check_app_mac("Spotify.app"):
-            ctrl("spotify")
-        else:
-            wb.open("https://open.spotify.com")
-        return "Coding Protocol ACTIVE"
+def close_app(app):
+    script = f'''
+        if application "{app}" is running  then tell application "{app}" to quit end if
+            '''
+    results = subprocess.run(
+            ["osascript", "-e", script],
+            capture_output=True,
+            text=True
+        )
 
-
-        
-        
-    elif command == "study":
-        if check_app_mac("ChatGpt Classic"):
-            ctrl("chatgpt")
-        else:
-            wb.open("https://chatgpt.com")
-        ctrl("safari")
-
-        entertaining_applications = ["tiktok.com", "youtube.com", "instagram.com", "netflix.com", "reddit.com"]
-
+def close_distracting_tabs():
         script = """
         tell application "Safari"
             set distracting_sites to {"""" + '", "'.join(entertaining_applications) + """"}
@@ -71,10 +52,33 @@ def protocol(command):
         except subprocess.CalledProcessError as e:
             print(f"An error occurred while trying to close tabs: {e.stderr}")
 
-        distracting_apps = ["Messages", "Steam", "Messages", "discord"]
-        for app in distracting_apps:
-            pass
-        pass
+
+def protocol(command):
+    command= command.removeprefix("protocol ").strip() # for ex "coding"
+    #check the json for what apps to open and what apps to close.
+    if command == "coding":
+        print("STARTING CODING PROTOCOL")
+        ctrl("vscode")
+        ctrl("terminal")
+        if check_app_mac("ChatGPT Classic"):
+            ctrl("chatgpt")
+        else:
+            wb.open("https://chatgpt.com")
+        wb.open("https://github.com")
+        wb.open("https://hackatime.hackclub.com")
+        if check_app_mac("Spotify"):
+            ctrl("spotify")
+        else:
+            wb.open("https://open.spotify.com")
+        return "Coding Protocol ACTIVE"
+
+
+        
+        
+    elif command == "study":
+        
+
+
     elif command == "house party":
         #trun evrythign off an amek the enjoy message and silence my computer turn of do not disturb mode
         pass
