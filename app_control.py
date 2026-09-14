@@ -181,8 +181,8 @@ def control(command):
             "nordvpn": "NordVPN.app",
     
             # AI Native Clients
-            "chatgpt": "ChatGPT.app",
-            "gpt": "ChatGPT.app",
+            "chatgpt": "ChatGPT Classic.app",
+            "gpt": "ChatGPT Classic.app",
             "claude": "Claude.app",
             "ollama": "Ollama.app",
     
