@@ -2,6 +2,7 @@ from help import help
 from datetime import datetime
 import random
 from app_control import control as ctrl
+from system_scan import scan
 
 while True:
     command = input("> ").lower()
@@ -21,6 +22,9 @@ while True:
 
     elif command.startswith("open") or command.startswith("launch"):
         ctrl(command)
+    elif command == "scan" or command =="check" or command =="health":
+        scan()
+
 
 
 

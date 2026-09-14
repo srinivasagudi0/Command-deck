@@ -16,7 +16,7 @@ def scan():
             print("Battery status: \t\t Charging")
             print("Estimated Time Remaining: \t\t Unlimited(plugged in)")
         else:
-            print("Battery status: Unplugged")
+            print("Battery status: \t\t Unplugged")
             print(f"Estimated Time Remaining: \t\t {str(datetime.timedelta(seconds=battery.secsleft))}")
     else:
         print("Something went wrong with battery detection")
@@ -42,7 +42,7 @@ def scan():
         left_gb = (total_gb-used_gb)
         free_percent = round(100- disk.percent, 1)
 
-        print(f"Storage: \t\t {left_gb}({free_percent})% available.")
+        print(f"Storage: \t\t {left_gb} GB ({free_percent})% available.")
 
     trash_size = 0
     trash_path = os.path.expanduser("~/.Trash")
@@ -72,14 +72,13 @@ def scan():
         print(f"macOS Version: \t\t {mac_version}")
 
     
-    device_name = socket.gethostbyname()
-    if device_name:
-        print(f"Device Name: \t\t {device_name}")
+
+        print(f"Device Name: \t\t MacBook")
 
     
     is_connected = False
     try:
-        requests.get("<unsafe_url>https://www.apple.com</unsafe_url>", timeout=2)
+        requests.get("<unsafe_url>https://www.apple.com</unsafe_url>", timeout=4)
         is_connected = True
     except:
         is_connected = False
