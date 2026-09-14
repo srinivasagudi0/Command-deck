@@ -4,7 +4,7 @@ import datetime
 import platform
 import socket
 import requests
-
+import os
 
 def scan():
     # need to search google a lot and I know all of them now and I memorized them now
@@ -44,7 +44,28 @@ def scan():
 
         print(f"Storage: \t\t {left_gb}({free_percent})% available.")
 
-    
+    trash_size = 0
+    trash_path = os.path.expanduser("~/.Trash")
+
+    if os.path.exists(trash_path):
+        for dir_path, dirnames, filenames in os.walk(trash_path):
+            for f in filenames:
+                fp = os.path.join(dir_path,f)
+            if not os.path.islink(fp):
+                trash_size += os.path.getsize(fp)
+        print(f"Trash size: {trash_size / (1024**3):.2f} GB")
+
+
+    chip_info = platform.processor()
+    machine_type = platform.machine()
+
+    if chip_info and machine_type:
+        print(f"Processor: \t\t {chip_info}")
+        print(f"Architecture: {machine_type}")
+
+    core_count = os.cpu_count()
+    if core_count:
+        print(f"Total CPU Cores: \t\t {core_count}")
 
     mac_version = platform.mac_ver()[0]
     if mac_version:
