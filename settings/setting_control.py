@@ -1,4 +1,10 @@
-def setiings():
+import json
+
+def settings():
+
+    with open("settings/seetings.json", "r") as f:
+        data = json.load(f)
+
     while True:
         print("Type a number to select")
         print("1. General")
@@ -16,8 +22,36 @@ def setiings():
 
         if choice == 1:
             print("1. Change User Name")
-            print("2. Confirm Before Closing application")
-            print()
+            print("2. Toggle confirm Before Closing application")
+            print("3. Back")
+
+            general_choice = input("> ").strip()
+
+            if general_choice == "1":
+                new_name = input("Enter a new user name: ").strip()
+
+                if new_name:
+                    data["general"]["user_name"] = new_name
+
+                    with open("settings/settings.json", "w") as s:
+                        json.dump(data, s, indent=4)
+
+                    print("User name changed.")
+
+            elif general_choice == "2":
+                current = data["general"]['confirm_before_closing']
+                data["general"]["confirm_before_closing"] = not current
+
+                with open('settings/settings.json', 'w') as file:
+                    json.dump(data, file, indent=4)
+
+                print(
+                    "Confirm before closing"
+                    data["general"]["confirm_before_closing"]
+                )
+
+
+
             
         elif choice == 2:
             print("1.Coding protocol")
