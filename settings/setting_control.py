@@ -18,10 +18,18 @@ def setiings():
             print("1. Change User Name")
             print("2. Confirm Before Closing application")
             print()
+            
         elif choice == 2:
-            pass
+            print("1.Coding protocol")
+            print("2. Study protocol")
+            print("3. Clean State protocol")
+            print("4. Add a new protocol!")
+
         elif choice == 3:
-            pass
+            print("1. Classic")
+            print("2. CyberPunk")
+            print("3. Choose a color")
+            print("4. Weight of the theme")
         elif choice == 4:
             break
         else:
