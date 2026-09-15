@@ -25,7 +25,7 @@ def settings():
             print("2. Toggle confirm Before Closing application")
             print("3. Back")
 
-            general_choice = input("> ").strip()
+            general_choice = input("Setting: ").strip()
 
             if general_choice == "1":
                 new_name = input("Enter a new user name: ").strip()
@@ -46,18 +46,22 @@ def settings():
                     json.dump(data, file, indent=4)
 
                 print(
-                    "Confirm before closing"
+                    "Confirm before closing: ",
                     data["general"]["confirm_before_closing"]
                 )
 
-
-
-            
+            elif general_choice == "3":
+                continue
+            else:
+                print("Invalid Choice")
+                        
         elif choice == 2:
             print("1.Coding protocol")
             print("2. Study protocol")
             print("3. Clean State protocol")
             print("4. Add a new protocol!")
+
+            
 
         elif choice == 3:
             print("1. Classic")
