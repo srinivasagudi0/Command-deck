@@ -16,7 +16,25 @@
             "safari": true,
             "notes": true,
             "chatgpt": true,
-            "close_distraction": true
+            "close_distractions": true
+        },
+        "clean_state": {
+            "Visual Studio Code": true,
+            "Safari": true,
+            "Google Chrome": true,
+            "ChatGPT Classic": true,
+            "Spotify": true,
+            "Discord": true,
+            "Steam": true,
+            "Notes": true,
+            "Music": true,
+            "TV": true,
+            "Slack": true
         }
+    },
+    "theme": {
+        "style": "classic",
+        "custom_color": "cyan",
+        "bold": false
     }
 }

@@ -4,15 +4,20 @@ import random
 from app_control import control as ctrl
 from system_scan import scan
 from protocol.protocol_control import protocol as pt
+from settings.setting_control import settings, load_settings, theme_code
 
 while True:
-    command = input("> ").lower()
+    color = theme_code(load_settings())
+    command = input(f"{color}> \033[0m").lower().strip()
 
     if command == "commands":
         print(help())
 
     elif command == "exit":
-        exit()
+        break
+
+    elif command == "settings":
+        settings()
 
     elif command=="time":
         now = datetime.now()
@@ -27,12 +32,5 @@ while True:
         scan()
     elif command.startswith("protocol "):
         print(pt(command))
-
-
-
-        
-
-
     else:
         print("Unknown Command")
-        

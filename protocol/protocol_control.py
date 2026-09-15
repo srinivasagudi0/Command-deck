@@ -4,6 +4,8 @@ import webbrowser as wb
 import subprocess
 import json
 
+SETTINGS_PATH = os.path.join(os.path.dirname(__file__), "..", "settings", "settings.json")
+
 def check_app_mac(app):
     app_path = f"/Applications/{app}.app"
 
@@ -64,7 +66,7 @@ def protocol(command):
     command= command.removeprefix("protocol ").strip() # for ex "coding"
     #check the json for what apps to open and what apps to close.
 
-    with open("settings/settings.json", "r") as f:
+    with open(SETTINGS_PATH, "r") as f:
         data = json.load(f)
 
     
@@ -97,32 +99,35 @@ def protocol(command):
  
     elif command == "study":
         print("Starting Study Protocol")
+        study = data["protocols"]["study"]
 
-        ctrl("safari")
-        ctrl("notes")
+        if study["safari"]:
+            ctrl("safari")
+        if study["notes"]:
+            ctrl("notes")
 
-        if check_app_mac("ChatGPT Classic"):
-            ctrl("chatgpt")
-        else:
-            wb.open("https://chatgpt.com")
+        if study["chatgpt"]:
+            if check_app_mac("ChatGPT Classic"):
+                ctrl("chatgpt")
+            else:
+                wb.open("https://chatgpt.com")
 
-        close_choice = input("Close distracting apps or websites? (Y/n):").lower().strip()
+        if study["close_distractions"]:
+            close_choice = "yes"
+            if data["general"]["confirm_before_closing"]:
+                close_choice = input("Close distracting apps or websites? (Y/n):").lower().strip()
 
-        if close_choice in ['y', 'yes', '']:
-            close_distracting_tabs()
+            if close_choice in ["y", "yes", ""]:
+                close_distracting_tabs()
 
-            distracting_apps = [
-                "Discord",
-                "Steam",
-                "TV"
-            ]
+                distracting_apps = ["Discord", "Steam", "TV"]
 
-            for app in distracting_apps:
-                close_app(app)
+                for app in distracting_apps:
+                    close_app(app)
 
-            print("Distractions cleared.")
-        else:
-            print("Ok, I won't")
+                print("Distractions cleared.")
+            else:
+                print("Ok, I won't")
         return "STUDY protocol ACTIVE"
 
 
@@ -131,30 +136,22 @@ def protocol(command):
         print("THis will request supported applications to quit.")
         print("Unsaved work may require your confirmation.")
 
-        choice = input("Continue? (Y/n)").lower().strip()
+        choice = "yes"
+        if data["general"]["confirm_before_closing"]:
+            choice = input("Continue? (Y/n)").lower().strip()
 
-        if choice not in (["y", "yes"]):
+        if choice not in ["y", "yes", ""]:
             return "CLEAN STATE CANCELLED"
 
-        applications = [
-            "Visual Studio Code",
-            "Safari",
-            "Google Chrome",
-            "ChatGPT Classic",
-            "Spotify",
-            "Discord",
-            "Steam",
-            "Notes",
-            "Music",
-            "TV",
-            "Slack"
-        ]
+        applications = data["protocols"]["clean_state"]
 
-        for app in applications:
+        for app, enabled in applications.items():
+            if not enabled:
+                continue
             if close_app(app):
                 print(f"Quit request sent: {app}")
             else:
-                print(f"Could not close.")
+                print(f"Could not close: {app}")
 
         return (
             "CLEAN STATE COMPLETE\n"
