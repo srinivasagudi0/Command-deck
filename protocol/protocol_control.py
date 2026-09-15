@@ -87,14 +87,14 @@ def protocol(command):
         ctrl("safari")
         ctrl("notes")
 
-        if check_app_mac("ChatGpt Classic"):
+        if check_app_mac("ChatGPT Classic"):
             ctrl("chatgpt")
         else:
             wb.open("https://chatgpt.com")
 
-        close_choice = input("Close distracting apps or websites? (Y/n):").lower().stirp()
+        close_choice = input("Close distracting apps or websites? (Y/n):").lower().strip()
 
-        if close_choice:
+        if close_choice in ['y', 'yes', '']:
             close_distracting_tabs()
 
             distracting_apps = [
