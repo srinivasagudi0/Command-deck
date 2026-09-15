@@ -20,6 +20,7 @@ def close_app(app):
             capture_output=True,
             text=True
         )
+    return results.returncode == 0
 
 def close_distracting_tabs():
     sites = [
@@ -113,8 +114,39 @@ def protocol(command):
 
 
     elif command == "clean state":
-        # make the comp ready for shutdwon close all the applciationsa and that yp e of way
-        pass
+        print("CLEAN STATE Protocol")
+        print("THis will request supported applications to quit.")
+        print("Unsaved work may require your confirmation.")
+
+        choice = input("Continue? (Y/n)").lower().strip()
+
+        if choice not in (["y", "yes"]):
+            return "CLEAN STATE CANCELLED"
+
+        applications = [
+            "Visual Studio Code",
+            "Safari",
+            "Google Chrome",
+            "ChatGPT Classic",
+            "Spotify",
+            "Discord",
+            "Steam",
+            "Notes",
+            "Music",
+            "TV",
+            "Slack"
+        ]
+
+        for app in applications:
+            if close_app(app):
+                print(f"Quit request sent: {app}")
+            else:
+                print(f"Could not close.")
+
+        return (
+            "CLEAN STATE COMPLETE\n"
+            "Review any unsaved work and type 'exit'. "
+        )
 
     else:
         return "Protocol not found, go to settings -> protocols -> add-custom-protocol. \nHere type out in own words what should happen and it will be added to your protocol list. \n Wait! now for better results restart the cli and carry on."
