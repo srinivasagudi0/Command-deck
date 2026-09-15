@@ -2,7 +2,7 @@ import os
 from app_control import control as ctrl
 import webbrowser as wb
 import subprocess
-
+import json
 
 def check_app_mac(app):
     app_path = f"/Applications/{app}.app"
@@ -63,25 +63,38 @@ def close_distracting_tabs():
 def protocol(command):
     command= command.removeprefix("protocol ").strip() # for ex "coding"
     #check the json for what apps to open and what apps to close.
+
+    with open("settings/settings.json", "r") as f:
+        data = json.load(f)
+
+    
+
     if command == "coding":
+        coding = data["protocols"]["coding"]
         print("STARTING CODING PROTOCOL")
-        ctrl("vscode")
-        ctrl("terminal")
-        if check_app_mac("ChatGPT Classic"):
-            ctrl("chatgpt")
-        else:
-            wb.open("https://chatgpt.com")
-        wb.open("https://github.com")
-        wb.open("https://hackatime.hackclub.com")
-        if check_app_mac("Spotify"):
-            ctrl("spotify")
-        else:
-            wb.open("https://open.spotify.com")
+        if coding["vscode"]:
+            ctrl("vscode")
+        if coding["terminal"]:
+            ctrl("terminal")
+        if coding["chatgpt"]:
+            if check_app_mac("ChatGPT Classic"):
+                ctrl("chatgpt")
+            else:
+                wb.open("https://chatgpt.com")
+        if coding["github"]:
+            wb.open("https://github.com")
+        if coding["hackatime"]:
+            wb.open("https://hackatime.hackclub.com")
+        if coding["Spotify"]:
+            if check_app_mac("Spotify"):
+                ctrl("spotify")
+            else:
+                wb.open("https://open.spotify.com")
         return "CODING protocol ACTIVE"
 
 
         
-        
+ 
     elif command == "study":
         print("Starting Study Protocol")
 
