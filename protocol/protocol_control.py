@@ -85,7 +85,7 @@ def protocol(command):
             wb.open("https://github.com")
         if coding["hackatime"]:
             wb.open("https://hackatime.hackclub.com")
-        if coding["Spotify"]:
+        if coding["spotify"]:
             if check_app_mac("Spotify"):
                 ctrl("spotify")
             else:

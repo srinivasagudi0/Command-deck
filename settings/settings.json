@@ -1,9 +1,9 @@
 {
     "general": {
         "user_name": "Anynomous",
-        "confirm_user": true
+        "confirm_before_closing": true
     },
-    "protocol": {
+    "protocols": {
         "coding": {
             "vscode": true,
             "terminal": true,

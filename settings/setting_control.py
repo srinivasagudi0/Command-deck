@@ -78,7 +78,7 @@ def settings():
 
                 while True:
                     print("\nCoding Protocol Settings")
-                    for number, option in enumerate():
+                    for number, option in enumerate(options, start=1):
                         label = option[0]
                         key = option[1]
                         status = "ON" if coding[key] else "OFF"
@@ -97,7 +97,7 @@ def settings():
                             key = options[number - 1][1]
                             coding[key] = not coding[key]
 
-                            with open("setting/settings.json", "w") as file:
+                            with open("settings/settings.json", "w") as file:
                                 json.dump(data, file, indent=4)
 
                             print("Setting Updated")
