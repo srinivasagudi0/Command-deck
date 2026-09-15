@@ -9,6 +9,8 @@ import os
 def scan():
     # need to search google a lot and I know all of them now and I memorized them now
 
+    print("User: \t\t {pending}")
+
     battery = psutil.sensors_battery()
     if battery:
         print(f"Battery percentage: \t\t{battery.percent}%")
