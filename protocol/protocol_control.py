@@ -107,12 +107,11 @@ def protocol(command):
                 close_app(app)
 
             print("Distractions cleared.")
+        else:
+            print("Ok, I won't")
         return "STUDY protocol ACTIVE"
 
 
-    elif command == "house party":
-        #trun evrythign off an amek the enjoy message and silence my computer turn of do not disturb mode
-        pass
     elif command == "clean state":
         # make the comp ready for shutdwon close all the applciationsa and that yp e of way
         pass
