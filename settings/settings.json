@@ -11,6 +11,12 @@
             "github": true,
             "hackatime": true,
             "spotify": true
+        },
+        "study": {
+            "safari": true,
+            "notes": true,
+            "chatgpt": true,
+            "close_distraction": true
         }
     }
 }

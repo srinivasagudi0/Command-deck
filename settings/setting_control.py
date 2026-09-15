@@ -105,6 +105,47 @@ def settings():
                             print("Choose between 1 and 7. ")
                     else:
                         print("enter a number")
+
+            elif protocol_choice == "2":
+                study = data["protocols"]["study"]
+
+                options = [
+                    ("Safari", "safari"),
+                    ("Notes", "notes"),
+                    ("ChatGPT", "chatgpt"),
+                    ("Close Distractions", "close_distractions")
+                ]
+
+                for number, option in enumerate(options, start=1):
+                    label = option[0]
+                    key = option[1]
+                    status = "ON" if study[key] else "OFF"
+                    print(f"{number}. {label}: {status}")
+                print("5. Back")
+
+                study_choice = input("settings: ").strip()
+
+                if study_choice == "5":
+                    break
+
+                if study_choice.isdigit():
+                    number = int(study_choice)
+
+                    if 1 <= number <= 4:
+                        key = options(number-1)[1]
+                        study[key]= not study[key]
+
+                        with open("settings/settings.json", "w") as f:
+                            json.dump(data, file, indent=4)
+
+                        print("Setting Updated")
+
+                    else:
+                        print("Choose between 1 and 5.")
+
+                    
+
+
             elif protocol_choice == "5":
                 continue
             else:
