@@ -3,6 +3,7 @@ from datetime import datetime
 import random
 from app_control import control as ctrl
 from system_scan import scan
+from protocol.protocol_control import protocol as pt
 
 while True:
     command = input("> ").lower()
@@ -24,7 +25,8 @@ while True:
         ctrl(command)
     elif command == "scan" or command =="check" or command =="health":
         scan()
-
+    elif command.startswith("protocol "):
+        print(pt(command))
 
 
 

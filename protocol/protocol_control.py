@@ -22,36 +22,42 @@ def close_app(app):
         )
 
 def close_distracting_tabs():
-        script = """
-        tell application "Safari"
-            set distracting_sites to {"""" + '", "'.join(entertaining_applications) + """"}
-            
-            repeat with w in windows
-                repeat with t in tabs of w
-                    set tab_url to URL of t
-                    repeat with site in distracting_sites
-                        if tab_url contains site then
-                            close t
+    sites = [
+        "tiktok.com",
+        "youtube.com",
+        "instagram.com",
+        "netflix.com",
+        "reddit.com"]
+
+    site_list = ", ".join(f'"{site}"' for site in sites)
+
+    script = f'''
+    tell application "Safari"
+        set distractingSites to {{{site_list}}}
+
+        repeat with currentWindow in windows
+            repeat with tabNumber from (count tabs of currentWindow) to 1 by -1
+                try
+                    set tabURL to URL of tab tabNumber of currentWindow
+
+                    repeat with siteName in distractingSites
+                        if tabURL contains siteName then
+                            close tab tabNumber of currentWindow
                             exit repeat
                         end if
                     end repeat
-                end repeat
+                end try
             end repeat
-        end tell
-        """
+        end repeat
+    end tell
+    ''' # wrote with the help of Ai
 
-        try:
-            # Use subprocess.run to execute the osascript
-            result = subprocess.run(
-                ["osascript", "-e", script], 
-                capture_output=True, 
-                text=True, 
-                check=True
-            )
-            print("Successfully closed distracting tabs.")
-        except subprocess.CalledProcessError as e:
-            print(f"An error occurred while trying to close tabs: {e.stderr}")
-
+    subprocess.run(
+        ["osascript", "-e", script],
+        capture_output=True,
+        text=True
+    )
+    
 
 def protocol(command):
     command= command.removeprefix("protocol ").strip() # for ex "coding"
@@ -70,13 +76,38 @@ def protocol(command):
             ctrl("spotify")
         else:
             wb.open("https://open.spotify.com")
-        return "Coding Protocol ACTIVE"
+        return "CODING protocol ACTIVE"
 
 
         
         
     elif command == "study":
-        
+        print("Starting Study Protocol")
+
+        ctrl("safari")
+        ctrl("notes")
+
+        if check_app_mac("ChatGpt Classic"):
+            ctrl("chatgpt")
+        else:
+            wb.open("https://chatgpt.com")
+
+        close_choice = input("Close distracting apps or websites? (Y/n):").lower().stirp()
+
+        if close_choice:
+            close_distracting_tabs()
+
+            distracting_apps = [
+                "Discord",
+                "Steam",
+                "TV"
+            ]
+
+            for app in distracting_apps:
+                close_app(app)
+
+            print("Distractions cleared.")
+        return "STUDY protocol ACTIVE"
 
 
     elif command == "house party":
