@@ -2,7 +2,7 @@ import json
 
 def settings():
 
-    with open("settings/seetings.json", "r") as f:
+    with open("settings/settings.json", "r") as f:
         data = json.load(f)
 
     while True:
@@ -60,6 +60,55 @@ def settings():
             print("2. Study protocol")
             print("3. Clean State protocol")
             print("4. Add a new protocol!")
+            print("5. Back")
+
+            protocol_choice = input("settings: ").strip()
+
+            if protocol_choice =="1":
+                coding = data["protocols"]["coding"]
+
+                options = [
+                    ("VS Code", "vscode"),
+                    ("Terminal", "terminal"),
+                    ("ChatGPT", "chatgpt"),
+                    ("GitHub", "github"),
+                    ("Hackatime", "hackatime"),
+                    ("Spotify", "spotify")
+                ]
+
+                while True:
+                    print("\nCoding Protocol Settings")
+                    for number, option in enumerate():
+                        label = option[0]
+                        key = option[1]
+                        status = "ON" if coding[key] else "OFF"
+                        print(f"{number}. {label}: {status}")
+                    print("7. Back")
+
+                    coding_choice = input("> ").strip()
+
+                    if coding_choice == "7":
+                        break
+
+                    if coding_choice.isdigit():
+                        number = int(coding_choice)
+
+                        if 1 <= number <=6:
+                            key = options[number - 1][1]
+                            coding[key] = not coding[key]
+
+                            with open("setting/settings.json", "w") as file:
+                                json.dump(data, file, indent=4)
+
+                            print("Setting Updated")
+                        else:
+                            print("Choose between 1 and 7. ")
+                    else:
+                        print("enter a number")
+            elif protocol_choice == "5":
+                continue
+            else:
+                print("That section is coming next. ")
 
             
 
