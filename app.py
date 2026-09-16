@@ -12,7 +12,7 @@ while True:
     color = theme_code(load_settings())
     command = input(f"{color}> \033[0m").lower().strip()
 
-    if command == "commands":
+    if command == "commands" or command == "help":
         print(help())
 
     elif command == "exit":

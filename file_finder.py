@@ -34,24 +34,30 @@ def find_files(query):
                     matches.append(full_path)
                     
 
+    matches = matches[:20]
+
     if not matches:
-        print("NO matches")
-    else:
-        print(matches[:20])
-        for number, path in enumerate(matches, start=1):
-            print(f'{number}. path')
+        print("No matches found.")
+        return
 
-            try:
-                choice = int(input("Open which file. Enter 0 to cancel: "))
+    for number, path in enumerate(matches, start=1):
+        print(f"{number}. {path}")
 
-                if choice == 0:
-                    return
+    try:
+        choice = int(input("Open which file? Enter 0 to cancel: "))
 
-                selected_file = matches[choice - 1]
-                subprocess.run(["open", selected_file])
-                print("File opened")
-            except (ValueError, IndexError):
-                print("Invalid choice.")
+        if choice == 0:
+            return
+
+        if not 1 <= choice <= len(matches):
+            print("Invalid choice.")
+            return
+
+        subprocess.run(["open", matches[choice - 1]])
+        print("File opened.")
+
+    except ValueError:
+        print("Invalid choice.")
 
     # get the whole ls of deskto
 

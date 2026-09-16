@@ -209,7 +209,7 @@ def control(command):
 
     if app in names:
         app = names[app]
-        subprocess.run(["open", "-a", app])
+
     result = subprocess.run(
         ["open", "-a", app],
         capture_output=True,

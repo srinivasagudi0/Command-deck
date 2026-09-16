@@ -56,3 +56,4 @@ def motivate():
     "Refactoring is like cleaning up the kitchen while you cook."
     ]
     quote = random.choice(quotes)
+    return quote

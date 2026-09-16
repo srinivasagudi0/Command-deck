@@ -5,11 +5,15 @@ import platform
 import socket
 import requests
 import os
+import json
 
 def scan():
     # need to search google a lot and I know all of them now and I memorized them now
+    with open("settings/settings.json", "r") as j:
+        a = json.dump()
+        user = a["general"]["user_name"]
 
-    print("User: \t\t {pending}")
+    print(f"User: \t\t {user}")
 
     battery = psutil.sensors_battery()
     if battery:
@@ -25,7 +29,7 @@ def scan():
 
     cpu_usage = psutil.cpu_percent(interval=1)
     if cpu_usage:
-        print("CPU: \t\t{cpu_usage}")
+        print(f"CPU: \t\t {cpu_usage}%")
 
     memory = psutil.virtual_memory()
     if memory:
@@ -51,10 +55,14 @@ def scan():
 
     if os.path.exists(trash_path):
         for dir_path, dirnames, filenames in os.walk(trash_path):
-            for f in filenames:
-                fp = os.path.join(dir_path,f)
-            if not os.path.islink(fp):
-                trash_size += os.path.getsize(fp)
+            for file_name in filenames:
+                file_path = os.path.join(dir_path, file_name)
+
+                try:
+                    if not os.path.islink(file_path):
+                        trash_size += os.path.getsize(file_path)
+                except OSError:
+                    continue
         print(f"Trash size: {trash_size / (1024**3):.2f} GB")
 
 
@@ -80,7 +88,7 @@ def scan():
     
     is_connected = False
     try:
-        requests.get("<unsafe_url>https://www.apple.com</unsafe_url>", timeout=4)
+        requests.get("https://www.apple.com", timeout=4)
         is_connected = True
     except:
         is_connected = False
