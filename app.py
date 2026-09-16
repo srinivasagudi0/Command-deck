@@ -34,6 +34,7 @@ while True:
     elif command.startswith("protocol "):
         print(pt(command))
 
-    elif command.startswith("find ")
+    elif command.startswith("find "):
+        finds(command)
     else:
         print("Unknown Command")

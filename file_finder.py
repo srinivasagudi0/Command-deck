@@ -1,7 +1,12 @@
 import os
+import subprocess
 
 def find_files(query):
     filename = query.removeprefix("find ").strip().lower()
+    if not filename:
+        print("Enter a filename. Ex: find homework")
+        return
+
     home = os.path.expanduser('~')
     # will only search desktop, downloads and docs
     places = [
@@ -27,12 +32,25 @@ def find_files(query):
                 if filename in file_name.lower():
                     full_path = os.path.join(current_folder, file_name)
                     matches.append(full_path)
-                    if len(matches) >= 20:
-                        return matches
+                    
 
     if not matches:
         print("NO matches")
-        print(matches)
+    else:
+        print(matches[:20])
+        for number, path in enumerate(matches, start=1):
+            print(f'{number}. path')
 
+            try:
+                choice = int(input("Open which file. Enter 0 to cancel: "))
+
+                if choice == 0:
+                    return
+
+                selected_file = matches[choice - 1]
+                subprocess.run(["open", selected_file])
+                print("File opened")
+            except (ValueError, IndexError):
+                print("Invalid choice.")
 
     # get the whole ls of deskto
