@@ -16,7 +16,7 @@ def say_joke():
     "Why was the computer cold? It left its Windows open.",
     "Why don't programmers play hide and seek? Because they always get caught in loops.",
     "What did the Java code say to the C code? You’ve got no class.",
-    "Why did the programmer quit his job? Because he didn't get arrays!"
+    "Why did the programmer quit his job? Because he didn't get arrays!",
     ]
 
     joke = random.choice(jokes)
@@ -53,7 +53,7 @@ def motivate():
     "There are only two hard things in Computer Science: cache invalidation and naming things.",
     "If you have to spend effort looking at a fragment of code, extract it into a function.",
     "Perfection is achieved when there is nothing more to take away.",
-    "Refactoring is like cleaning up the kitchen while you cook."
+    "Refactoring is like cleaning up the kitchen while you cook.",
     ]
     quote = random.choice(quotes)
     return quote

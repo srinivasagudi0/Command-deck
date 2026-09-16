@@ -15,8 +15,10 @@ def check_app_mac(app):
 
 def close_app(app):
     script = f'''
-        if application "{app}" is running  then tell application "{app}" to quit end if
-            '''
+        if application "{app}" is running then
+            tell application "{app}" to quit
+        end if
+        '''
     results = subprocess.run(
             ["osascript", "-e", script],
             capture_output=True,
