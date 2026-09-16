@@ -5,6 +5,7 @@ from app_control import control as ctrl
 from system_scan import scan
 from protocol.protocol_control import protocol as pt
 from settings.setting_control import settings, load_settings, theme_code
+from file_finder import find_files as finds
 
 while True:
     color = theme_code(load_settings())
@@ -32,5 +33,7 @@ while True:
         scan()
     elif command.startswith("protocol "):
         print(pt(command))
+
+    elif command.startswith("find ")
     else:
         print("Unknown Command")
