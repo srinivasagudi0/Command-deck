@@ -5,7 +5,7 @@ from app_control import control as ctrl
 from system_scan import scan
 from protocol.protocol_control import protocol as pt
 from settings.setting_control import settings, load_settings, theme_code
-from file_finder import find_files as finds
+from file_finder import find_files as finds, get_recent_files
 from small_help import say_joke, motivate
 
 while True:
@@ -42,6 +42,9 @@ while True:
 
     elif command == "motivate":
         print(motivate())
+
+    elif command == "recent files":
+        get_recent_files()
 
     else:
         print("Unknown Command")
