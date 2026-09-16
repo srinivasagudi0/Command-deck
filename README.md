@@ -4,6 +4,10 @@ A python terminal assistant that helps user control their mac from one place in 
 
 I built this to organize commands in one place and to learn more about python.
 
+## Why futuristic
+
+Command Deck feels futuristic because it turns simple words into real macOS actions, allowing users to control applications, activate automated protocols, inspect their system, and find files from one command center built for the future.
+
 ## Features
 
 It can open and close mac applications(with your permission)
