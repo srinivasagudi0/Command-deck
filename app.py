@@ -6,7 +6,7 @@ from system_scan import scan
 from protocol.protocol_control import protocol as pt
 from settings.setting_control import settings, load_settings, theme_code
 from file_finder import find_files as finds
-from small_help import say_joke
+from small_help import say_joke, motivate
 
 while True:
     color = theme_code(load_settings())
@@ -39,6 +39,9 @@ while True:
         finds(command)
     elif command == "joke":
         print(say_joke())
+
+    elif command == "motivate":
+        print(motivate())
 
     else:
         print("Unknown Command")
