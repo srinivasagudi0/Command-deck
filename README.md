@@ -26,3 +26,5 @@ It can open and close mac applications(with your permission)
 Built by Srinivasa Gudi for future ysws (hackclub).
 
 # Screenshots
+
+![alt text](image.png)
