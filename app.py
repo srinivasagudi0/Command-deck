@@ -8,6 +8,9 @@ from settings.setting_control import settings, load_settings, theme_code
 from file_finder import find_files as finds, get_recent_files
 from small_help import say_joke, motivate
 
+def future():
+        return "The future is not something we wait for. It is something we command."
+
 while True:
     color = theme_code(load_settings())
     command = input(f"{color}> \033[0m").lower().strip()
@@ -45,6 +48,10 @@ while True:
 
     elif command == "recent files":
         get_recent_files()
+
+
+    elif command == "future":
+        print(future())
 
     else:
         print("Unknown Command")
