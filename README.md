@@ -25,7 +25,8 @@ It can open and close mac applications(with your permission)
 
 - Clone this repo using:
   `git clone https://github.com/srinivasagudi0/Command-deck.git`
-- Install requirements.txt
+- Install requirements.txt using:
+  `pip install -r requirements.txt`
 - simply run the app.py
 
 Built by Srinivasa Gudi for future ysws (hackclub).
