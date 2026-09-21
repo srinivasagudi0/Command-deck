@@ -10,7 +10,7 @@ import json
 def scan():
     # need to search google a lot and I know all of them now and I memorized them now
     with open("settings/settings.json", "r") as j:
-        a = json.dump()
+        a = json.dump(j)
         user = a["general"]["user_name"]
 
     print(f"User: \t\t {user}")
